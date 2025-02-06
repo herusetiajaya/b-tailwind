@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+      };
+    </script>
     <style type="text/tailwindcss">
         /* @theme {
           --color-clifford: #da373d;
@@ -11,10 +16,13 @@
          /* * {
             border : 1px solid red;
          } */
+          #toggle:checked ~ label div.toggle-circle{
+            @apply translate-x-3;
+          }
       </style>
     <title>Belajar TailwindCSS</title>
   </head>
-  <body>
+  <body class="dark:bg-slate-800 dark:text-slate-200">
     <h1 class="text-8xl font-bold text-clifford text-center my-20">
       Mari Belajar <span class="bg-gradient-to-r from-blue-500 to-teal-500 bg-clip-text text-transparent">
         TailwindCSS
@@ -83,11 +91,24 @@
 
     <hr class="my-20">
 
-    <button class="my-10 bg-sky-500 px-5 py-2 rounded-full text-white font-semibold font-serif mx-auto block hover:bg-sky-600 active:bg-sky-700 focus:ring focus:ring-green-500">Simpan</button>
+    <div class="flex justify-center">
+      <span class="text-sm text-slate-500 mr-2">Light</span>
+      <input type="checkbox" id="toggle" class="hidden">
+      <label for="toggle">
+        <div class="w-9 h-5 bg-slate-500 rounded-full flex items-center p-1 cursor-pointer">
+          <div class="w-4 h-4 bg-white rounded-full toggle-circle">
 
-    <div class="max-w-lg my-10 border border-slate-200 rounded-xl mx-auto p-5 shadow-md font-serif hover:bg-sky-500 group">
-      <h5 class="font-bold text-slate-700 text-lg mb-3 group-hover:text-white">My Card</h5>
-      <p class="text-slate-700 group-hover:text-white selection:bg-lime-300 selection:text-slate-900 first-line:uppercase first-line:tracking-widest first-letter:text-7xl first-letter:float-left first-letter:mr-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam temporibus facilis, dolore accusamus illo consequatur obcaecati, quae placeat nemo iure excepturi porro, vitae amet! Quibusdam mollitia ducimus nulla illo consequatur!</p>
+          </div>
+        </div>
+      </label>
+      <span class="text-sm text-slate-500 ml-2">Dark</span>
+    </div>
+
+    <button class="my-10 bg-sky-500 px-5 py-2 rounded-full text-white font-semibold font-serif mx-auto block hover:bg-sky-600 active:bg-sky-700 focus:ring focus:ring-green-500 dark:bg-slate-300 dark:text-slate-800 dark:hover:text-slate-900 dark:hover:bg-slate-100">Simpan</button>
+
+    <div class="max-w-lg my-10 border border-slate-200 rounded-xl mx-auto p-5 shadow-md font-serif hover:bg-sky-500 group dark:hover:bg-slate-300">
+      <h5 class="font-bold text-slate-700 text-lg mb-3 group-hover:text-white dark:group-hover:text-slate-800">My Card</h5>
+      <p class="text-slate-700 group-hover:text-white selection:bg-lime-300 selection:text-slate-900 first-line:uppercase first-line:tracking-widest first-letter:text-7xl first-letter:float-left first-letter:mr-3 dark:group-hover:text-slate-800">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam temporibus facilis, dolore accusamus illo consequatur obcaecati, quae placeat nemo iure excepturi porro, vitae amet! Quibusdam mollitia ducimus nulla illo consequatur!</p>
     </div>
 
     <div class="max-w-lg my-10 border border-slate-200 rounded-xl mx-auto p-5 shadow-md font-serif">
@@ -101,5 +122,13 @@
     </div>
 
     <div class="mb-96"></div>
+
+    <script>
+      const checkbox = document.querySelector('#toggle');
+      const html = document.querySelector('html');
+      checkbox.addEventListener('click', function(){
+        checkbox.checked ? html.classList.add('dark') : html.classList.remove('dark');
+      });
+    </script>
   </body>
 </html>
